@@ -36,3 +36,8 @@ Cada “cartela” revela momentos, ideias de dates e experiências que podem se
 ---
 
 ## 📁 Estrutura do projeto
+loteria-do-amor/
+│
+├── index.html
+├── style.css
+├── script.js
