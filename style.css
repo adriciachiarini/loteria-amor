@@ -127,12 +127,12 @@ h1{
 @media (max-width: 768px){
 
     .linha{
-        flex-wrap: nowrap;   /* impede quebrar linha */
+        flex-wrap: nowrap;   
         gap:10px;
     }
 
     .bolinha{
-        width: 30%;          /* 3 itens cabem na tela */
+        width: 30%;          
         min-height: 90px;
         font-size:12px;
         padding:8px;
