@@ -1,0 +1,38 @@
+# 💕 Loteria do Amor
+
+Um mini jogo interativo feito com HTML, CSS e JavaScript, criado como uma experiência divertida e romântica para explorar ideias de encontros entre duas pessoas.
+
+Cada “cartela” revela momentos, ideias de dates e experiências que podem ser vividas de forma leve, criativa e aleatória.
+
+---
+
+## ✨ Funcionalidades
+
+- Cartela interativa com “cards” clicáveis
+- Revelação progressiva dos encontros
+- Salvamento automático do progresso (localStorage)
+- Botão para resetar toda a cartela
+- Layout responsivo e estilo visual romântico
+- Animação suave ao revelar cada card
+
+---
+
+## 💡 Como funciona
+
+1. Cada card começa oculto com um ❤️
+2. Ao clicar, o card é revelado com o conteúdo do encontro
+3. O progresso fica salvo automaticamente no navegador
+4. É possível reiniciar tudo com o botão de reset
+
+---
+
+## 🛠️ Tecnologias usadas
+
+- HTML5
+- CSS3
+- JavaScript (Vanilla)
+- LocalStorage do navegador
+
+---
+
+## 📁 Estrutura do projeto
