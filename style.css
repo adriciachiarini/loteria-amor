@@ -123,3 +123,19 @@ h1{
     transform:scale(1.05);
     background:#e63956;
 }
+
+@media (max-width: 768px){
+
+    .linha{
+        flex-wrap: nowrap;   /* impede quebrar linha */
+        gap:10px;
+    }
+
+    .bolinha{
+        width: 30%;          /* 3 itens cabem na tela */
+        min-height: 90px;
+        font-size:12px;
+        padding:8px;
+        border-radius:14px;
+    }
+}
