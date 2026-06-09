@@ -20,7 +20,7 @@ const encontros = [
 
 [
 "Uma sessão de karaokê cheia de drama",
-"Performances dramáticas permitidas sem vergonha",
+"Performances dramáticas e pelo menos uma música bem ruim pra cada uma",
 "Música escolhida pela outra pessoa"
 ],
 
