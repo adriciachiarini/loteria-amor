@@ -184,6 +184,7 @@ encontros.forEach((linha, linhaIndex) => {
 
             revelados++;
             atualizarContador();
+            verificarRecompensas();
 
             if (colunaIndex < 2) {
 
@@ -224,6 +225,86 @@ function atualizarContador() {
         .textContent = `Revelados: ${revelados}`;
 
 }
+
+function verificarRecompensas() {
+
+    let encontrosConcluidos = 0;
+
+    encontros.forEach((linha, linhaIndex) => {
+
+        let completa = true;
+
+        for (let coluna = 0; coluna < 3; coluna++) {
+
+            const chave = `linha-${linhaIndex}-coluna-${coluna}`;
+
+            if (!localStorage.getItem(chave)) {
+                completa = false;
+                break;
+            }
+
+        }
+
+        if (completa) {
+            encontrosConcluidos++;
+        }
+
+    });
+
+    if (
+        encontrosConcluidos >= 5 &&
+        !localStorage.getItem("premio5")
+    ) {
+
+        alert(
+`🎁 RECOMPENSA DESBLOQUEADA!
+
+💆 Vale 10 minutos de massagem`
+        );
+
+        localStorage.setItem("premio5", "true");
+    }
+
+    if (
+        encontrosConcluidos >= 10 &&
+        !localStorage.getItem("premio10")
+    ) {
+
+        alert(
+`🎁 RECOMPENSA DESBLOQUEADA!
+
+😏 Vale boquinha em local inusitado`
+        );
+
+        localStorage.setItem("premio10", "true");
+    }
+
+    if (
+        encontrosConcluidos === encontros.length &&
+        !localStorage.getItem("finalLoteria")
+    ) {
+
+        alert(
+`💖 FINAL DA LOTERIA DO AMOR 💖
+
+Parabéns!
+
+Vocês completaram todos os encontros da cartela.
+
+Entre filmes, passeios, comidas, jogos, aventuras da Eva e momentos especiais, vocês transformaram uma simples ideia em um monte de memórias juntas.
+
+Agora existe apenas um problema:
+
+Vocês terminaram a Loteria do Amor. 😱
+
+Talvez seja hora da segunda temporada... ❤️`
+        );
+
+        localStorage.setItem("finalLoteria", "true");
+    }
+}
+
+
 
 atualizarContador();
 
