@@ -129,41 +129,14 @@ const encontros = [
 ];
 
 const cartela = document.getElementById("cartela");
-const contador = document.getElementById("contador");
-const som = document.getElementById("som");
-const resetBtn = document.getElementById("reset");
-
 let revelados = 0;
 
-// atualiza contador
-function atualizarContador(){
-    contador.textContent = `Revelados: ${revelados}`;
-}
-
-// calcula o que já estava salvo
-function calcularRevelados(){
-    let total = 0;
-
-    encontros.forEach((linha, i)=>{
-        linha.forEach((_, j)=>{
-            const chave = `linha-${i}-coluna-${j}`;
-            if(localStorage.getItem(chave)) total++;
-        });
-    });
-
-    return total;
-}
-
-revelados = calcularRevelados();
-atualizarContador();
-
-// cria cartela
-encontros.forEach((linha, linhaIndex)=>{
+encontros.forEach((linha, linhaIndex) => {
 
     const divLinha = document.createElement("div");
     divLinha.classList.add("linha");
 
-    linha.forEach((texto,colunaIndex)=>{
+    linha.forEach((texto, colunaIndex) => {
 
         const chave = `linha-${linhaIndex}-coluna-${colunaIndex}`;
 
@@ -172,44 +145,95 @@ encontros.forEach((linha, linhaIndex)=>{
 
         const salva = localStorage.getItem(chave);
 
-        if(salva){
+        if (salva) {
+
             bolinha.classList.add("aberta");
             bolinha.textContent = texto;
+            revelados++;
+
         } else {
-            bolinha.textContent = "❤️";
+
+            if (colunaIndex === 0) {
+                bolinha.textContent = "❤️";
+            } else {
+                bolinha.textContent = "🔒";
+                bolinha.classList.add("bloqueada");
+            }
+
         }
 
-        bolinha.addEventListener("click",()=>{
+        bolinha.addEventListener("click", () => {
 
-            if(localStorage.getItem(chave)) return;
+            if (localStorage.getItem(chave)) return;
 
+            if (colunaIndex > 0) {
+
+                const anterior =
+                    localStorage.getItem(
+                        `linha-${linhaIndex}-coluna-${colunaIndex - 1}`
+                    );
+
+                if (!anterior) return;
+            }
+
+            bolinha.classList.remove("bloqueada");
             bolinha.classList.add("aberta");
             bolinha.textContent = texto;
 
-            localStorage.setItem(chave,"aberta");
+            localStorage.setItem(chave, "aberta");
 
             revelados++;
             atualizarContador();
 
-            // som fofo (opcional)
-            if(som){
-                som.currentTime = 0;
-                som.play();
+            if (colunaIndex < 2) {
+
+                const proximaChave =
+                    `linha-${linhaIndex}-coluna-${colunaIndex + 1}`;
+
+                const proximaBolinha =
+                    document.querySelector(
+                        `[data-chave="${proximaChave}"]`
+                    );
+
+                if (
+                    proximaBolinha &&
+                    !localStorage.getItem(proximaChave)
+                ) {
+
+                    proximaBolinha.classList.remove("bloqueada");
+                    proximaBolinha.textContent = "❤️";
+
+                }
             }
+
         });
 
+        bolinha.setAttribute("data-chave", chave);
+
         divLinha.appendChild(bolinha);
+
     });
 
     cartela.appendChild(divLinha);
+
 });
 
-// reset da cartela
-resetBtn.addEventListener("click",()=>{
+function atualizarContador() {
 
-    if(!confirm("Tem certeza que deseja reiniciar a cartela? seu progresso será apagado!")) return;
+    document.getElementById("contador")
+        .textContent = `Revelados: ${revelados}`;
+
+}
+
+atualizarContador();
+
+document.getElementById("reset").addEventListener("click", () => {
+
+    if (!confirm("Tem certeza que deseja reiniciar toda a cartela?")) {
+        return;
+    }
 
     localStorage.clear();
     location.reload();
-});
 
+});
