@@ -1,5 +1,9 @@
 const encontros = [
 
+
+["Fiz pra você, usei minha criatividade inteirinha!",
+"Ok, não foi inteira, mas me esforcei muito a semana toda",
+"Você merece muito mais que isso, espero que goste, Feliz dia das namoradas!"],    
 [
 "Date em casa",
 "Comida típica feita em casa",
