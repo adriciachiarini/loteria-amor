@@ -130,11 +130,15 @@ const encontros = [
 
 const cartela = document.getElementById("cartela");
 let revelados = 0;
+const concluidos = document.getElementById("concluidos");
+
+let ultimaLinhaCompleta = null;
 
 encontros.forEach((linha, linhaIndex) => {
 
     const divLinha = document.createElement("div");
     divLinha.classList.add("linha");
+    divLinha.setAttribute("data-linha", linhaIndex);
 
     linha.forEach((texto, colunaIndex) => {
 
@@ -165,6 +169,7 @@ encontros.forEach((linha, linhaIndex) => {
         bolinha.addEventListener("click", () => {
 
             if (localStorage.getItem(chave)) return;
+            moverLinhaAnterior();
 
             if (colunaIndex > 0) {
 
@@ -183,8 +188,12 @@ encontros.forEach((linha, linhaIndex) => {
             localStorage.setItem(chave, "aberta");
 
             revelados++;
+            
             atualizarContador();
             verificarRecompensas();
+            if(linhaCompleta(linhaIndex)){
+    ultimaLinhaCompleta = linhaIndex;
+}
 
             if (colunaIndex < 2) {
 
@@ -304,7 +313,40 @@ Talvez seja hora da segunda temporada... ❤️`
     }
 }
 
+function linhaCompleta(linhaIndex){
 
+    for(let coluna = 0; coluna < 3; coluna++){
+
+        if(
+            !localStorage.getItem(
+                `linha-${linhaIndex}-coluna-${coluna}`
+            )
+        ){
+            return false;
+        }
+
+    }
+
+    return true;
+}
+
+function moverLinhaAnterior(){
+
+    if(ultimaLinhaCompleta === null) return;
+
+    const linha =
+        document.querySelector(
+            `[data-linha="${ultimaLinhaCompleta}"]`
+        );
+
+    if(linha){
+
+        concluidos.appendChild(linha);
+
+    }
+
+    ultimaLinhaCompleta = null;
+}
 
 atualizarContador();
 
